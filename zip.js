@@ -16,5 +16,5 @@ if (argv.help || (Object.keys(argv).length === 1 && argv._.length === 0)) {
 
   if (!outPath) outPath = inPath + '.zip'
 
-  zip.zip(inPath, outPath, false)
+  zip.zipSync(inPath, outPath, false)
 }
