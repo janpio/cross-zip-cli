@@ -4,7 +4,7 @@ var argv = require('minimist')(process.argv.slice(2))
 var fs = require('fs')
 var path = require('path')
 var pkg = require('./package')
-var zip = require('cross-zip')
+var zip = require('@tybys/cross-zip')
 
 if (argv.help || (Object.keys(argv).length === 1 && argv._.length === 0)) {
   fs.createReadStream(path.join(__dirname, './zip-usage.txt')).pipe(process.stdout)
@@ -16,9 +16,5 @@ if (argv.help || (Object.keys(argv).length === 1 && argv._.length === 0)) {
 
   if (!outPath) outPath = inPath + '.zip'
 
-  zip.zip(inPath, outPath, function (err) {
-    if (!err) return
-    process.exitCode = 1
-    console.error(err.message)
-  })
+  zip.zip(inPath, outPath, false)
 }

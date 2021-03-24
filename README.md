@@ -1,20 +1,16 @@
-cross-zip-cli
+@janpio/cross-zip-cli
 =============
 
 [![npm][npm-image]][npm-url]
-[![travis][travis-image]][travis-url]
-![windows Build status][windows-build-status]
 [![standard][standard-image]][standard-url]
 
-[npm-image]: https://img.shields.io/npm/v/cross-zip-cli.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/cross-zip-cli
-[travis-image]: https://img.shields.io/travis/jprichardson/cross-zip-cli.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/@janpio/cross-zip-cli.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@janpio/cross-zip-cli
 [travis-url]: https://travis-ci.org/jprichardson/cross-zip-cli
-[windows-build-status]: https://img.shields.io/appveyor/ci/jprichardson/cross-zip-cli/master.svg?label=windows%20build
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 
-Zip/Unzip directories cross platform from the CLI. Great for npm scripts. Built on [cross-zip][cross-zip].
+Zip/Unzip directories cross platform from the CLI (without including the base directory). Great for npm scripts. Built on [@tybys/cross-zip](https://github.com/toyobayashi/cross-zip). Fork of [cross-zip-cli](https://github.com/jprichardson/cross-zip-cli)
 
 ## Why?
 
@@ -67,7 +63,9 @@ Options:
 ```
 
 ## Related
-- [cross-zip][cross-zip]: npm module this is built on.
+- Built on [@tybys/cross-zip](https://github.com/toyobayashi/cross-zip): npm module this is built on.
+- [cross-zip-cli](https://github.com/jprichardson/cross-zip-cli): package this fork is based on.
+- [cross-zip][cross-zip]: npm module the parent is based on.
 
 ## License
 
