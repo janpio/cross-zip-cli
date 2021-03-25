@@ -1,22 +1,22 @@
-var fs = require('fs-extra')
-var os = require('os')
-var path = require('path')
-var spawn = require('cross-spawn')
-var test = require('tape')
+const fs = require('fs-extra')
+const os = require('os')
+const path = require('path')
+const spawn = require('cross-spawn')
+const test = require('tape')
 
 test('zip / unzip', function (t) {
   t.plan(9)
 
-  var zip = path.join(__dirname, '../zip.js')
-  var unzip = path.join(__dirname, '../unzip.js')
+  const zip = path.join(__dirname, '../zip.js')
+  const unzip = path.join(__dirname, '../unzip.js')
 
-  var testDir = path.join(os.tmpdir(), 'cross-zip-cli')
+  const testDir = path.join(os.tmpdir(), 'cross-zip-cli')
   fs.emptyDirSync(testDir)
-  var dirToZip = createFixtures(testDir)
-  var zipFile = dirToZip + '.zip'
+  let dirToZip = createFixtures(testDir)
+  const zipFile = dirToZip + '.zip'
 
   // zip it
-  var zipResults = spawn.sync(zip, [dirToZip, zipFile])
+  const zipResults = spawn.sync(zip, [dirToZip, zipFile])
   t.strictEqual(zipResults.status, 0, 'zip return code 0')
   t.strictEqual(zipResults.stdout.toString('utf8').trim(), '', 'no text to display')
   t.true(fs.existsSync(zipFile), 'zip file created')
@@ -24,7 +24,7 @@ test('zip / unzip', function (t) {
   // unzip it
   fs.removeSync(dirToZip)
 
-  var unzipResults = spawn.sync(unzip, [zipFile, dirToZip])
+  const unzipResults = spawn.sync(unzip, [zipFile, dirToZip])
   t.strictEqual(unzipResults.status, 0, 'unzip return code 0')
   t.strictEqual(unzipResults.stdout.toString('utf8').trim(), '', 'no text to display')
   t.true(fs.existsSync(dirToZip), 'unzip dir created')
@@ -44,16 +44,16 @@ test('zip / unzip', function (t) {
 test('zip / unzip (without params)', function (t) {
   t.plan(9)
 
-  var zip = path.join(__dirname, '../zip.js')
-  var unzip = path.join(__dirname, '../unzip.js')
+  const zip = path.join(__dirname, '../zip.js')
+  const unzip = path.join(__dirname, '../unzip.js')
 
-  var testDir = path.join(os.tmpdir(), 'cross-zip-cli')
+  const testDir = path.join(os.tmpdir(), 'cross-zip-cli')
   fs.emptyDirSync(testDir)
-  var dirToZip = createFixtures(testDir)
-  var zipFile = dirToZip + '.zip'
+  let dirToZip = createFixtures(testDir)
+  const zipFile = dirToZip + '.zip'
 
   // zip it
-  var zipResults = spawn.sync(zip, [dirToZip])
+  const zipResults = spawn.sync(zip, [dirToZip])
   t.strictEqual(zipResults.status, 0, 'zip return code 0')
   t.strictEqual(zipResults.stdout.toString('utf8').trim(), '', 'no text to display')
   t.true(fs.existsSync(zipFile), 'zip file created')
@@ -61,7 +61,7 @@ test('zip / unzip (without params)', function (t) {
   // unzip it
   fs.removeSync(dirToZip)
 
-  var unzipResults = spawn.sync(unzip, [zipFile])
+  const unzipResults = spawn.sync(unzip, [zipFile])
   t.strictEqual(unzipResults.status, 0, 'unzip return code 0')
   t.strictEqual(unzipResults.stdout.toString('utf8').trim(), '', 'no text to display')
   t.true(fs.existsSync(dirToZip), 'unzip dir created')
@@ -79,7 +79,7 @@ test('zip / unzip (without params)', function (t) {
 })
 
 function createFixtures (testDir) {
-  var zipDir = path.join(testDir, 'gonna-zip-this')
+  const zipDir = path.join(testDir, 'gonna-zip-this')
 
   fs.outputFileSync(path.join(zipDir, 'f1.txt'), 'hello1')
   fs.outputFileSync(path.join(zipDir, 'f2.txt'), 'hello2')
