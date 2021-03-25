@@ -34,6 +34,10 @@ test('zip / unzip', function (t) {
     dirToZip = path.join(dirToZip, 'gonna-zip-this')
   }
 
+  fs.readdirSync(dirToZip).forEach(file => {
+    console.log(file);
+  });
+  
   t.strictEqual(fs.readFileSync(path.join(dirToZip, 'f1.txt'), 'utf8'), 'hello1', 'contents of file 1')
   t.strictEqual(fs.readFileSync(path.join(dirToZip, 'f2.txt'), 'utf8'), 'hello2', 'contents of file 2')
   t.strictEqual(fs.readFileSync(path.join(dirToZip, 'subdir', 'f3.txt'), 'utf8'), 'hello3', 'contents of file 3')
@@ -70,6 +74,10 @@ test('zip / unzip (without params)', function (t) {
   if (process.platform !== 'win32') {
     dirToZip = path.join(dirToZip, 'gonna-zip-this')
   }
+
+  fs.readdirSync(dirToZip).forEach(file => {
+    console.log(file);
+  });
 
   t.strictEqual(fs.readFileSync(path.join(dirToZip, 'f1.txt'), 'utf8'), 'hello1', 'contents of file 1')
   t.strictEqual(fs.readFileSync(path.join(dirToZip, 'f2.txt'), 'utf8'), 'hello2', 'contents of file 2')
