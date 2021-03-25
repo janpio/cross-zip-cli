@@ -16,5 +16,9 @@ if (argv.help || (Object.keys(argv).length === 1 && argv._.length === 0)) {
 
   if (!outPath) outPath = inPath + '.zip'
 
-  zip.zipSync(inPath, outPath, false)
+  try {
+    zip.zipSync(inPath, outPath, false)
+  } catch (error) {
+    console.log(error)
+  }
 }

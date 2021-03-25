@@ -1,7 +1,7 @@
 {
   "name": "@janpio/cross-zip-cli",
   "description": "Zip directories cross platform from the CLI (without including the base directory).",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "JP Richardson <jprichardson@gmail.com>",
   "contributors": ["Jan Piotrowski <piotrowski@gmail.com>"],
   "bin": {
