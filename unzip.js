@@ -17,5 +17,5 @@ if (argv.help || (Object.keys(argv).length === 1 && argv._.length === 0)) {
   // TODO: zip file may not have '.zip' extension
   if (!outPath) outPath = inPath.replace('.zip', '')
 
-  zip.unzipSync(inPath, outPath)
+  zip.unzip(inPath, outPath)
 }
