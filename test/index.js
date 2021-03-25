@@ -12,7 +12,7 @@ test('zip / unzip', function (t) {
 
   const testDir = path.join(os.tmpdir(), 'cross-zip-cli')
   fs.emptyDirSync(testDir)
-  let dirToZip = createFixtures(testDir)
+  const dirToZip = createFixtures(testDir)
   const zipFile = dirToZip + '.zip'
 
   // zip it
@@ -23,24 +23,22 @@ test('zip / unzip', function (t) {
 
   // unzip it
   fs.removeSync(dirToZip)
+  const dirToUnzip = path.join('testDir', 'unzipDir')
 
-  const unzipResults = spawn.sync(unzip, [zipFile, dirToZip])
+  const unzipResults = spawn.sync(unzip, [zipFile, dirToUnzip])
   t.strictEqual(unzipResults.status, 0, 'unzip return code 0')
   t.strictEqual(unzipResults.stdout.toString('utf8').trim(), '', 'no text to display')
-  t.true(fs.existsSync(dirToZip), 'unzip dir created')
+  t.true(fs.existsSync(dirToUnzip), 'unzip dir created')
 
-  // may need to change this silliness
-  if (process.platform !== 'win32') {
-    dirToZip = path.join(dirToZip, 'gonna-zip-this')
-  }
-
-  fs.readdirSync(path.join(dirToZip, '..')).forEach(file => {
+  fs.readdirSync(path.join(dirToUnzip)).forEach(file => {
     console.log(file)
   })
 
-  t.strictEqual(fs.readFileSync(path.join(dirToZip, '..', 'f1.txt'), 'utf8'), 'hello1', 'contents of file 1')
-  t.strictEqual(fs.readFileSync(path.join(dirToZip, '..', 'f2.txt'), 'utf8'), 'hello2', 'contents of file 2')
-  t.strictEqual(fs.readFileSync(path.join(dirToZip, '..', 'subdir', 'f3.txt'), 'utf8'), 'hello3', 'contents of file 3')
+  t.strictEqual(fs.readFileSync(path.join(dirToUnzip, 'f1.txt'), 'utf8'), 'hello1', 'contents of file 1')
+  t.strictEqual(fs.readFileSync(path.join(dirToUnzip, 'f2.txt'), 'utf8'), 'hello2', 'contents of file 2')
+  t.strictEqual(fs.readFileSync(path.join(dirToUnzip, 'subdir', 'f3.txt'), 'utf8'), 'hello3', 'contents of file 3')
+
+  fs.removeSync(dirToUnzip)
 
   t.end()
 })
@@ -53,7 +51,7 @@ test('zip / unzip (without params)', function (t) {
 
   const testDir = path.join(os.tmpdir(), 'cross-zip-cli')
   fs.emptyDirSync(testDir)
-  let dirToZip = createFixtures(testDir)
+  const dirToZip = createFixtures(testDir)
   const zipFile = dirToZip + '.zip'
 
   // zip it
@@ -70,18 +68,13 @@ test('zip / unzip (without params)', function (t) {
   t.strictEqual(unzipResults.stdout.toString('utf8').trim(), '', 'no text to display')
   t.true(fs.existsSync(dirToZip), 'unzip dir created')
 
-  // may need to change this silliness
-  if (process.platform !== 'win32') {
-    dirToZip = path.join(dirToZip, 'gonna-zip-this')
-  }
-
   fs.readdirSync(path.join(dirToZip, '..')).forEach(file => {
     console.log(file)
   })
 
-  t.strictEqual(fs.readFileSync(path.join(dirToZip, '..', 'f1.txt'), 'utf8'), 'hello1', 'contents of file 1')
-  t.strictEqual(fs.readFileSync(path.join(dirToZip, '..', 'f2.txt'), 'utf8'), 'hello2', 'contents of file 2')
-  t.strictEqual(fs.readFileSync(path.join(dirToZip, '..', 'subdir', 'f3.txt'), 'utf8'), 'hello3', 'contents of file 3')
+  t.strictEqual(fs.readFileSync(path.join(dirToZip, 'f1.txt'), 'utf8'), 'hello1', 'contents of file 1')
+  t.strictEqual(fs.readFileSync(path.join(dirToZip, 'f2.txt'), 'utf8'), 'hello2', 'contents of file 2')
+  t.strictEqual(fs.readFileSync(path.join(dirToZip, 'subdir', 'f3.txt'), 'utf8'), 'hello3', 'contents of file 3')
 
   t.end()
 })
