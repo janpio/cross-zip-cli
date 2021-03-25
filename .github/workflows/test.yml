@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [4, 6, 8, 10, 12, 14]
+        node: [10, 12, 14]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }}, node ${{ matrix.node }}
 
